@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="com.aj.db.domain.log.StieLog" table="t_stie_log" >
+    <id name="id" column="f_id" type="long" >
+     <generator class="sequence">
+		  <param name="sequence">seq_stie_log_id</param>
+       </generator>
+    </id>
+    
+	<property name="status" type="integer"  column="f_status" />
+	<many-to-one name="antertainmentGame" class="com.aj.db.domain.antertainment.AntertainmentGame" column="f_antertainment_game_id"></many-to-one>
+
+	
+  </class>	
+  
+</hibernate-mapping>

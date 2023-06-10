@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="com.aj.db.domain.user.Player" table="t_player">
+    <id name="id" column="f_id" type="long">
+     <generator class="sequence">
+		  <param name="sequence">seq_player_id</param>
+       </generator>
+    </id>
+    
+	<property name="name" type="string"  column="f_name" />
+	<property name="password" type="string" column="f_password" />
+    <property name="email" type="string" column="f_email" />
+    <property name="phone" type="string" column="f_phone" />
+    <property name="status" type="integer" column="f_status" />
+    <property name="createDate" column="f_create_date" type="timestamp"/>
+    <property name="createIp" type="string" column="f_create_ip" />
+	<property name="loginDate" type="timestamp" column="f_login_date" />
+    <property name="loginIp" type="string" column="f_login_ip" />
+	<property name="lastLoginDate" type="timestamp" column="f_last_login_date" />
+	<property name="lastLoginIp" type="string" column="f_last_login_ip" />
+	<property name="online" type="integer" column="f_online" />
+	<property name="refPlayerId" type="string" column="f_ref_player_id" />
+	
+    <many-to-one name="entity" class="com.aj.db.domain.user.Entity" column="f_entity_id" lazy="false"  ></many-to-one>
+    
+</class> 
+</hibernate-mapping>

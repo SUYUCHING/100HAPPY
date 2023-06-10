@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="com.aj.db.domain.user.EntityWallet" table="t_entity_wallet" >
+    <id name="id" column="f_id" type="long" >
+     <generator class="sequence">
+		  <param name="sequence">seq_entity_wallet_id</param>
+       </generator>
+    </id>
+    
+	<property name="credit" type="big_decimal"  column="f_credit" />
+	<property name="type" type="integer"  column="f_type" />
+	
+	<many-to-one name="entity" class="com.aj.db.domain.user.Entity" column="f_entity_id"></many-to-one>
+	
+
+	
+  </class>
+</hibernate-mapping>

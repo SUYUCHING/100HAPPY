@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+ <beans>
+	
+	<bean id="baccaratService" class="com.aj.casino.baccarat.service.BaccartaServiceImpl">
+		<property name="baccaratHbmDao" ref="baccaratHbmDao" />
+	</bean>
+	
+	<bean id="calculateService" class="com.aj.casino.baccarat.service.CalculateServiceImpl">
+		<property name="baccaratHbmDao" ref="baccaratHbmDao" />
+	</bean>
+	
+	<!-- new -->
+	<bean id="playerAccountService" class="com.aj.casino2.player.beforeLogin.account.service.PlayerAccountServiceImpl">
+		<property name="playerHbmDao" ref="playerHbmDao" />
+		<property name="playerWalletHbmDao" ref="playerWalletHbmDao" />
+		<property name="entityHbmDao" ref="entityHbmDao" />
+	</bean>
+
+	<bean id="playerGameRequestService"
+		class="com.aj.casino2.player.afterLogin.game.service.PlayerGameRequestServiceImpl">
+		<property name="antertainmentHbmDao" ref="antertainmentHbmDao" />
+		<property name="playerGameLogHbmDao" ref="playerGameLogHbmDao" />
+		<property name="playerHbmDao" ref="playerHbmDao" />
+		<property name="entityHbmDao" ref="entityHbmDao" />
+		<property name="apiService" ref="apiService" />
+	</bean>
+	
+	
+	<!-- api -->
+	<bean id="apiService" class="com.aj.casino2.player.common.service.ApiService">
+		<property name="casinoRemoteService" ref="casinoRemoteService" />
+	</bean>
+
+	<bean id="casinoRemoteService" class="com.aj.casino2.player.common.api.CasinoRemoteServiceImpl">
+		<property name="casinoGameRequestService" ref="casinoGameRequestService" />
+	</bean>
+
+	
+	
+	
+</beans> 

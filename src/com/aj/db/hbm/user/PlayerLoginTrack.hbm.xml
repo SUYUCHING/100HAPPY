@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="com.aj.db.domain.user.PlayerLoginTrack" table="t_player_login_track">
+    <id name="id" column="f_id" type="long">
+      <generator class="sequence">
+		  <param name="sequence">seq_player_login_track_id</param>
+       </generator>
+    </id>
+    
+    <property name="ip" column="f_ip" type="string" />
+    <property name="loginDate" column="f_login_date" type="timestamp"/>
+    
+    <property name="type" column="f_type" type="integer" />
+    <property name="logoutDate" column="f_logout_date" type="timestamp"/>
+    
+    <property name="loginUrl" column="f_login_url" type="string"/>
+    <property name="loginType" column="f_login_type" type="integer"/>
+
+    <many-to-one name="player" class="com.aj.db.domain.user.Player" column="f_player_id" not-null="true"/>
+    
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="com.aj.db.domain.user.PlayerWallet" table="t_player_wallet" >
+    <id name="id" column="f_id" type="long" >
+     <generator class="sequence">
+		  <param name="sequence">seq_player_wallet_id</param>
+       </generator>
+    </id>
+	<property name="credit" type="big_decimal"  column="f_credit" />
+    <property name="creditType" column="f_credit_yype" type="integer"/>
+
+
+    <many-to-one name="player" class="com.aj.db.domain.user.Player" column="f_player_id" lazy="false"  ></many-to-one>
+	
+  </class>
+</hibernate-mapping>

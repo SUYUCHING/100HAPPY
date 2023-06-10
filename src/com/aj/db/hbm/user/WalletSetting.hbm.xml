@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="com.aj.db.domain.user.WalletSetting" table="t_wallet_setting" >
+    <id name="id" column="f_id" type="long" >
+     <generator class="sequence">
+		  <param name="sequence">seq_wallet_setting_id</param>
+       </generator>
+    </id>
+    <property name="creditType" column="f_credit_yype" type="integer"/>
+    <property name="convertCreditType" column="f_convert_credit_type" type="integer"/>
+    <property name="rate" column="f_rate" type="big_decimal"/>
+
+  </class>
+</hibernate-mapping>

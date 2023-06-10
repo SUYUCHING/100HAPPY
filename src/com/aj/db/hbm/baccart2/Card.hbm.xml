@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>   
+  <class name="com.aj.db.domain.baccart2.Card" table="t_card" >
+    <id name="id" column="f_id" type="long" >
+     <generator class="sequence">
+		  <param name="sequence">seq_card_id</param>
+       </generator>
+    </id>
+
+	<property name="p1" type="integer"  column="f_p1" />
+	<property name="p2" type="integer"  column="f_p2" />
+	<property name="p3" type="integer"  column="f_p3" />
+	<property name="p4" type="integer"  column="f_p4" />
+	<property name="p5" type="integer"  column="f_p5" />
+	<property name="p6" type="integer"  column="f_p6" />
+	<property name="p7" type="integer"  column="f_p7" />
+	<property name="p8" type="integer"  column="f_p8" />
+	<property name="p9" type="integer"  column="f_p9" />
+	<property name="p10" type="integer"  column="f_p10" />
+	<property name="p11" type="integer"  column="f_p11" />
+	<property name="p12" type="integer"  column="f_p12" />
+	<property name="p13" type="integer"  column="f_p13" />
+	
+	<property name="s1" type="integer"  column="f_s1" />
+	<property name="s2" type="integer"  column="f_s2" />
+	<property name="s3" type="integer"  column="f_s3" />
+	<property name="s4" type="integer"  column="f_s4" />
+	<property name="s5" type="integer"  column="f_s5" />
+	<property name="s6" type="integer"  column="f_s6" />
+	<property name="s7" type="integer"  column="f_s7" />
+	<property name="s8" type="integer"  column="f_s8" />
+	<property name="s9" type="integer"  column="f_s9" />
+	<property name="s10" type="integer"  column="f_s10" />
+	<property name="s11" type="integer"  column="f_s11" />
+	<property name="s12" type="integer"  column="f_s12" />
+	<property name="s13" type="integer"  column="f_s13" />
+	
+    <property name="h1" type="integer"  column="f_h1" />
+	<property name="h2" type="integer"  column="f_h2" />
+	<property name="h3" type="integer"  column="f_h3" />
+	<property name="h4" type="integer"  column="f_h4" />
+	<property name="h5" type="integer"  column="f_h5" />
+	<property name="h6" type="integer"  column="f_h6" />
+	<property name="h7" type="integer"  column="f_h7" />
+	<property name="h8" type="integer"  column="f_h8" />
+	<property name="h9" type="integer"  column="f_h9" />
+	<property name="h10" type="integer"  column="f_h10" />
+	<property name="h11" type="integer"  column="f_h11" />
+	<property name="h12" type="integer"  column="f_h12" />
+	<property name="h13" type="integer"  column="f_h13" />
+	
+	<property name="b1" type="integer"  column="f_b1" />
+	<property name="b2" type="integer"  column="f_b2" />
+	<property name="b3" type="integer"  column="f_b3" />
+	<property name="b4" type="integer"  column="f_b4" />
+	<property name="b5" type="integer"  column="f_b5" />
+	<property name="b6" type="integer"  column="f_b6" />
+	<property name="b7" type="integer"  column="f_b7" />
+	<property name="b8" type="integer"  column="f_b8" />
+	<property name="b9" type="integer"  column="f_b9" />
+	<property name="b10" type="integer"  column="f_b10" />
+	<property name="b11" type="integer"  column="f_b11" />
+	<property name="b12" type="integer"  column="f_b12" />
+	<property name="b13" type="integer"  column="f_b13" />
+	
+	
+  </class> 
+</hibernate-mapping>

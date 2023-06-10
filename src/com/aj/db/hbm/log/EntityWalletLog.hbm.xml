@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="com.aj.db.domain.log.EntityWalletLog" table="t_entity_wallet_log" >
+    <id name="id" column="f_id" type="long" >
+     <generator class="sequence">
+		  <param name="sequence">seq_entity_wallet_log_id</param>
+       </generator>
+    </id>
+    
+	<property name="amount" type="big_decimal"  column="f_amount" />
+	<property name="beforeCredit" type="big_decimal"  column="f_before_credit" />
+	<property name="afterCredit" type="big_decimal"  column="f_after_credit" />
+	<property name="type" type="integer"  column="f_type" />
+	<property name="createDate" type="timestamp"  column="f_create_date" />
+	<property name="remark" type="string"  column="f_remark" />
+	<property name="actionBy" type="string"  column="f_action_by" />
+	<property name="actionId" type="long"  column="f_action_id" />
+	<property name="refId" type="long"  column="f_ref_id" />
+	<property name="refType" type="integer"  column="f_ref_type" />
+	<property name="creditType" type="integer"  column="f_credit_type" />
+	
+	
+	<many-to-one name="entityWallet" class="com.aj.db.domain.user.EntityWallet" column="f_entity_wallet_id"></many-to-one>
+	
+
+	
+  </class>
+</hibernate-mapping>

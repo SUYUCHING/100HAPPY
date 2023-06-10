@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<import resource="security.xml" />
+	<import resource="/config/applicationContextProperties.xml" />
+
+	<import resource="/config/remote-context.xml" />
+	<import resource="/config/pyp-context.xml" />
+	<import resource="/config/pyp-dao-context.xml" /> 
+
+</beans>

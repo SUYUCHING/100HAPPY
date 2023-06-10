@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+		<bean id="casinoGameRequestService" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+          <property name="serviceUrl">
+            <value>${casino.http}</value>
+          </property>
+            <property name="serviceInterface">
+            <value>com.aj.client.CasinoGameRequestService</value>
+          </property>
+        </bean>
+     
+</beans>

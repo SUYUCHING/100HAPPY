@@ -1,0 +1,171 @@
+<project name="PyP API System Build" default="compile" basedir=".">
+
+<!-- Define the properties file -->
+<property file="pyp.build.properties"/>
+
+<!-- Define compile parameter -->
+<property name="compile.debug"       value="true"/>
+<property name="compile.deprecation" value="false"/>
+<property name="compile.optimize"    value="true"/>
+<property name="build.war"    		value="${build.home}/war"/>
+<property name="build.ejb"    		value="${build.home}/ejb"/>
+<property name="build.all"    		value="${build.home}/all"/>
+<property name="bin.war"    		value="${build.home}/bin/war"/>
+<property name="bin.ejb"    		value="${build.home}/bin/ejb"/>
+<property name="bin.ear"    		value="${build.home}/bin/ear"/>
+<property name="prepare.war"    	value="${build.home}/prepare/war"/>
+<property name="prepare.ejb"    	value="${build.home}/prepare/ejb"/>
+<property name="prepare.ear"    	value="${build.home}/prepare/ear"/>
+<property name="generated.ejb"    	value="${build.home}/gen/ejb"/>
+<property name="generated.hiber"   	value="${build.home}/gen/hiber"/>
+
+<!-- Define classpath parameter -->
+
+<path id="compile.classpath">
+	<pathelement location="${lib.home}"/>
+	<fileset dir="${lib.home}">
+	  	<include name="*"/>
+	</fileset>
+	<fileset dir="${lib.home}/casino">
+			  	<include name="*"/>
+	</fileset>
+</path>
+
+<!-- ==================== HBM to Java ==================================== -->
+
+<target name="codegen"
+               description="Generate Java source code
+                            from the Hibernate mapping files">
+                            
+    <taskdef name="hibernatetool"
+        classname="org.hibernate.tool.ant.HibernateToolTask"
+        classpathref="compile.classpath"/>
+
+    <hibernatetool destdir="${src.home}">
+        <configuration propertyFile="build.properties">
+            <fileset dir="${src.home}">
+                <include name="**/*.hbm.xml"/>
+            </fileset>
+        </configuration>
+
+        <hbm2java />
+    </hibernatetool>
+</target> 
+   
+<!-- ==================== Clean Target ==================================== -->
+
+  <target name="clean"
+   description="Delete old build and dist directories">
+    <delete dir="${build.home}"/>
+    <delete dir="${dist.home}"/>
+    <delete dir="${deploy.home}/${deploy.server}"/>
+  </target>
+
+<!-- ==================== Compile Target ================================== -->
+
+
+  <target name="compile" 
+  description="Compile Java sources">
+
+    <!-- Compile Java classes as necessary -->
+      <mkdir dir="${build.all}"/>
+      <javac
+      	 srcdir="${src.home}"
+         destdir="${build.all}"
+         debug="${compile.debug}"
+         deprecation="${compile.deprecation}"
+         optimize="${compile.optimize}">
+        <classpath refid="compile.classpath"/>
+    </javac>
+
+    <!-- Copy associated resource files -->
+    <copy  todir="${build.all}">
+	    <fileset dir="${src.home}" includes="**/*.properties"/>
+	    <fileset dir="${src.home}" includes="**/*.xml"/>
+    	<fileset dir="${src.home}" excludes="**/*.java"/>
+    </copy>
+
+  </target>
+
+	<!-- ==================== Deploy Target =================================== -->
+
+	<target name="deploy" depends="compile" description="Deploy application to servlet container">
+
+		    <!-- Copy the contents of the build directory -->
+		    <mkdir     dir="${deploy.home}/${deploy.server}"/>
+		    <mkdir     dir="${deploy.home}/${deploy.server}/WEB-INF/classes"/>
+		    <mkdir     dir="${deploy.home}/${deploy.server}/WEB-INF/lib"/>
+		  	<mkdir     dir="${deploy.home}/${deploy.server}/WEB-INF/config"/>
+			<copy    todir="${deploy.home}/${deploy.server}">
+						<fileset dir="${web.home}" />
+			</copy> 
+			
+		    <copy    todir="${deploy.home}/${deploy.server}/WEB-INF">
+		      <fileset dir="config/WEB-INF" includes="*.xml,*.tld,*.properties"/>
+		    </copy>
+		  	
+		  	<copy    todir="${deploy.home}/${deploy.server}/WEB-INF/config">
+		  		<fileset dir="config/WEB-INF/config" includes="*.xml"/>
+		  	</copy>
+		  	
+		    <copy    todir="${deploy.home}/${deploy.server}/WEB-INF/classes">
+		    	<fileset dir="${build.all}" >
+		    		<!--<exclude name="com/aj/exe/**" />
+		    		<exclude name="com/test/**" />-->
+		    	</fileset>
+		    	<fileset dir="config/properties" includes="*.*"/>
+		    </copy>
+		  	
+			<copy    todir="${deploy.home}/${deploy.server}/WEB-INF/lib">
+				<fileset dir="${lib.home}" excludes="j2ee.jar,postgresql-9.1-901.jdbc4.jar"/>
+				<fileset dir="${lib.home}/casino">
+					<include name="*" />
+				</fileset>
+			</copy>
+		
+		  </target>
+	
+	<target name="jar-pyp" description="Create jar core file">
+			<mkdir dir="${dist.home}"/>
+			
+			<!-- Create application JAR file -->
+			<jar jarfile="${dist.home}/pyp.jar" >
+				<fileset dir="${build.all}" includes="src"></fileset>
+			</jar>
+			
+			
+		</target>
+	
+<!-- ==================== Generate DDL ===================================== -->
+	
+	<target name="schemaexport">
+		    <taskdef name="schemaexport"
+		        classname="org.hibernate.tool.hbm2ddl.SchemaExportTask"
+		        classpathref="compile.classpath"/>
+		    
+		    <schemaexport
+		        properties="pyp.build.properties"
+		        quiet="no"
+		        text="no"
+		        drop="no"
+		        delimiter=";"
+		        output="schema-export.sql">
+		        <fileset dir="${src.home}">
+		            <include name="**/*.hbm.xml"/>
+		        </fileset>
+		    </schemaexport> 
+		</target>
+		
+		<target name="schemaupdate">
+		    <taskdef name="schemaupdate"
+		        classname="org.hibernate.tool.hbm2ddl.SchemaUpdateTask"
+		        classpathref="compile.classpath"/>
+		    
+		    <schemaupdate properties="pyp.build.properties" quiet="no">
+		        <fileset dir="${src.home}">
+		            <include name="**/*.hbm.xml"/>
+		        </fileset>
+		   </schemaupdate> 
+		</target>
+  
+</project>

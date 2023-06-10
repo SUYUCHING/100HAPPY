@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="com.aj.db.domain.antertainment.AntertainmentGameType" table="t_antertainment_game_type" >
+    <id name="id" column="f_id" type="long" >
+     <generator class="sequence">
+		  <param name="sequence">seq_antertainment_game_type_id</param>
+       </generator>
+    </id>
+    
+	<property name="code" type="string"  column="f_code" />
+	<property name="name" type="string"  column="f_name" />
+
+	<many-to-one name="antertainmentGameCategory" class="com.aj.db.domain.antertainment.AntertainmentGameCategory" column="f_antertainment_game_category_id"></many-to-one>
+	
+  </class>
+</hibernate-mapping>

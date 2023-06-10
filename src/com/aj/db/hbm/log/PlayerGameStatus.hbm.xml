@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="com.aj.db.domain.log.PlayerGameStatus" table="t_player_game_status" >
+    <id name="id" column="f_id" type="long" >
+     <generator class="sequence">
+		  <param name="sequence">seq_player_game_status_id</param>
+       </generator>
+    </id>
+    
+	<property name="ttWinLose" type="big_decimal"  column="f_tt_win_lose" />
+	<property name="seq" type="integer"  column="f_seq" />
+	<property name="status" type="integer"  column="f_status" />
+	<property name="ttBet" type="big_decimal"  column="f_tt_bet" />
+	<property name="createDate" type="timestamp"  column="f_create_date" />
+	<property name="endDate" type="timestamp"  column="f_end_date" />
+	
+	
+	<many-to-one name="player" class="com.aj.db.domain.user.Player" column="f_player_id"></many-to-one>
+	<many-to-one name="antertainmentGameType" class="com.aj.db.domain.antertainment.AntertainmentGameType" column="f_antertainment_game_type_id"></many-to-one>
+	
+
+	
+  </class>
+</hibernate-mapping>
